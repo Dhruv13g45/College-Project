@@ -1,0 +1,23 @@
+html {
+    font-family: "Exo", monospace;
+    user-select: none;
+}
+
+body {
+    position: relative;
+}
+
+
+.heroSection {
+    width: 100%;
+    padding: 0% 5%;
+    height: 100vh;
+    background: url("./assets/LandingPagebg.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.aboutImg {
+    mix-blend-mode: multiply;
+}
