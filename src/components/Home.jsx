@@ -80,7 +80,7 @@ const Home = () => {
             {/* Star Players */}
 
 
-            <div className='w-full bg-gradient-to-tl from-[#28286a] to-[#12adfb] p-20 mt-14'>
+            <div className='w-full bg-gradient-to-tl from-[#28286a] to-[#12adfb] p-20 mt-14 rounded-t-3xl'>
                 <h1 className='text-[3rem] text-white text-center font-bold mb-10 tracking-widest'>OUR FENCERS</h1>
                 <div className=" text-white grid grid-cols-3 gap-10">
                     <div className='rounded-3xl bg-blue-900 flex justify-center items-center flex-col' >

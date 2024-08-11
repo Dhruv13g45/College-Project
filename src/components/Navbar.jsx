@@ -11,6 +11,7 @@ import { FaInstagram } from "react-icons/fa";
 import { FaFacebookSquare } from "react-icons/fa";
 import { CiYoutube } from "react-icons/ci";
 import PlayerRegistor from './PlayerRegistor.jsx'
+import PlayerLogin from './PlayerLogin.jsx'
 
 const Navbar = () => {
     return (
@@ -27,11 +28,12 @@ const Navbar = () => {
 
 
 
-                <div className='links_container flex justify-evenly items-center w-3/5 px-20 bg-transparent text-2xl font-bold'>
-                    <NavLink to="/" className={({ isActive }) => `(${isActive} ? "underline underline-offset-4" : "")`}>Home</NavLink>
-                    <NavLink to="admin" className={({ isActive }) => `(${isActive} ? "underline underline-offset-4" : "")`}>Admin Login</NavLink>
-                    <NavLink to="player" className={({ isActive }) => `(${isActive} ? "underline underline-offset-4" : "")`}>Player Registor</NavLink>
-                    <NavLink to="account" className={({ isActive }) => `(${isActive} ? "underline underline-offset-4" : "")`}>Account</NavLink>
+                <div className='links_container flex justify-between items-center w-3/5 px-20 bg-transparent text-xl font-bold'>
+                    <NavLink to="/" className={({ isActive }) => `${isActive ? "border border-white rounded-3xl hover:no-underline px-5 py-3" : "text-white"} duration-200 ease-in-out`}>Home</NavLink>
+                    <NavLink to="admin" className={({ isActive }) => `${isActive ? "border border-white rounded-3xl hover:no-underline px-5 py-3" : "text-white"} duration-200 ease-in-out`}>Admin Login</NavLink>
+                    <NavLink to="playerLogin" className={({ isActive }) => `${isActive ? "border border-white rounded-3xl hover:no-underline px-5 py-3" : "text-white"} duration-200 ease-in-out`}>Player Login</NavLink>
+                    <NavLink to="playerRegistor" className={({ isActive }) => `${isActive ? "border border-white rounded-3xl hover:no-underline px-5 py-3" : "text-white"} duration-200 ease-in-out`}>Player Registor</NavLink>
+                    <NavLink to="account" className={({ isActive }) => `${isActive ? "border border-white rounded-3xl hover:no-underline px-5 py-3" : "text-white"} duration-200 ease-in-out`}>Account</NavLink>
                 </div>
 
 
@@ -54,8 +56,9 @@ const Navbar = () => {
 
             <Routes>
                 <Route path='/' element={<Home />} />
-                <Route path='player' element={<PlayerRegistor />} />
                 <Route path="admin" element={<Adminlogin />} />
+                <Route path='playerLogin' element={<PlayerLogin />} />
+                <Route path='playerRegistor' element={<PlayerRegistor />} />
                 <Route path="account" element={<Account />}>
                     <Route path='certificates' element={<Certificates />} />
                     <Route path='docs' element={<Documents />} />

@@ -3,11 +3,28 @@ import '../App.css'
 import { FiUpload } from "react-icons/fi";
 import { useState } from 'react';
 import { IoCheckmarkDone } from "react-icons/io5";
+import Logo from "../assets/Logo.png"
+
+
 
 const PlayerRegistor = () => {
 
     const [photo, setphoto] = useState("");
+    const [gender, setGender] = useState("");
+    const [name, setName] = useState("");
+    const [phone, setPhone] = useState("");
+    const [mail, setMail] = useState("");
+    const [dob, setDob] = useState("");
     const [aadhar, setAadhar] = useState("");
+    const [aadharPhoto, setAadharPhoto] = useState("");
+    const [eventName, setEventName] = useState("");
+    const [pincode, setPincode] = useState("");
+    const [city, setCity] = useState("");
+    const [addOne, setAddOne] = useState("");
+    const [addTwo, setAddTwo] = useState("");
+    const [optionValue, setOptionValue] = useState("");
+
+
 
     const uploadPhoto = (event) => {
         const file = event.target.files[0];
@@ -35,7 +52,7 @@ const PlayerRegistor = () => {
 
         }
         const fileUrl = URL.createObjectURL(file);
-        setAadhar(fileUrl)
+        setAadharPhoto(fileUrl)
         console.log(fileUrl);
     }
 
@@ -43,8 +60,53 @@ const PlayerRegistor = () => {
 
     const sendFormData = (event) => {
         event.preventDefault();
+        setName("")
+        setphoto("")
+        setGender("")
+        setAadharPhoto("")
+        setPhone("")
+        setAadhar("")
+        setMail("")
+        setDob("")
+        setEventName("")
+        setPincode("")
+        setCity("")
+        setAddOne("")
+        setAddTwo("")
     }
 
+
+    const updateName = (event) => {
+        setName(event.target.value)
+    }
+
+    const updateGender = (event) => {
+        setGender(event.target.value)
+    }
+    const updatePhone = (event) => {
+        setPhone(event.target.value)
+    }
+    const updateMail = (event) => {
+        setMail(event.target.value)
+    }
+    const updateDob = (event) => {
+        setDob(event.target.value)
+    }
+    const updateAadhar = (event) => {
+        setAadhar(event.target.value)
+    }
+    const updatePincode = (event) => {
+        setPincode(event.target.value)
+    }
+    const updateCity = (event) => {
+        setCity(event.target.value)
+    }
+    const updateAdd1 = (event) => {
+        setAddOne(event.target.value)
+    }
+    const updateAdd2 = (event) => {
+        setAddTwo(event.target.value)
+    }
 
 
 
@@ -53,134 +115,139 @@ const PlayerRegistor = () => {
     return (
         <>
             <div className='playerRegistor h-full'>
+                <div className=' w-full pt-24 px-20'>
+                    <form method='POST' className='text-black font-bold p-10 bg-white rounded-xl flex items-center flex-col w-full'>
+                        <img src={Logo} alt="clubimage" className='w-[200px]' />
+
+                        <div className='bg-slate-300 w-full'>
+                            <h1 className='w-full text-center text-2xl bg-blue-400 py-3 rounded-t-xl text-white'>Personal Details</h1>
 
 
-
-                <div className=' w-full rounded-3xl px-20'>
-                    <h1 className='text-center pt-24 pb-10 text-yellow-600 underline underline-offset-4 font-bold text-3xl'>Registor Player</h1>
-                    <form method='POST' className='text-black  flex items-start flex-col w-full'>
-
-
-                        <div className='flex justify-between items-center w-full my-3'>
-                            <div>
-                                <label htmlFor="name">Player Full Name:</label>
-                                <input type="text" name="name" id="name" required={true} />
-
+                            <div className='w-full flex justify-between items-center gap-5'>
+                                <div className='w-1/2 my-2'>
+                                    <label htmlFor="name">Full Name:</label>
+                                    <input type="text" name='name' id="name" className='w-full border border-black' value={name} onChange={updateName} placeholder='Full Name' />
+                                </div>
+                                <div className='w-1/2 my-2'>
+                                    <label htmlFor="gender">Gender:</label>
+                                    <input type="text" name='gender' id='gender' className='w-full border border-black' value={gender} onChange={updateGender} placeholder='Male/Female/Others' />
+                                </div>
                             </div>
 
-                            <div>
-                                <label htmlFor="gender">Gender:</label>
-                                <select name="gender" id="gender" className='w-[7rem] h-[2.5rem] border-none rounded-xl p-3 ml-3'>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                </select>
-
+                            <div className='w-full flex justify-between items-center gap-5'>
+                                <div className='w-1/2 my-2'>
+                                    <label htmlFor="phone">Phone:</label>
+                                    <input type="text" name='phone' id="phone" className='w-full border border-black' value={phone} onChange={updatePhone} placeholder='0000000000' />
+                                </div>
+                                <div className='w-1/2 my-2'>
+                                    <label htmlFor="mail">E-Mail:</label>
+                                    <input type="email" name='mail' id='mail' className='w-full border border-black' value={mail} onChange={updateMail} placeholder='abc@xyz.com' />
+                                </div>
                             </div>
 
-                            <div>
-                                <label htmlFor="dob">Date of Birth:</label>
-                                <input type="date" name="dob" id="dob" required={true} />
 
+                            <div className='w-full flex justify-between items-center gap-5'>
+                                <div className='w-1/2 my-2'>
+                                    <label htmlFor="dob">Date Of Birth:</label>
+                                    <input type="date" name='dob' id="dob" className='w-full border border-black' value={dob} onChange={updateDob} />
+                                </div>
+                                <div className='w-1/2 my-2'>
+                                    <label htmlFor="aadhar">Aadhar Card Number:</label>
+                                    <input type="number" name='aadhar' id='aadhar' className='w-full border border-black' value={aadhar} onChange={updateAadhar} placeholder='0000-0000-0000' />
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div className='bg-slate-300 w-full  mt-10'>
+                            <h1 className='w-full text-center text-2xl bg-blue-400 py-3 rounded-t-xl text-white'>Address Details</h1>
+
+
+                            <div className='w-full flex justify-between items-center gap-5'>
+                                <div className='w-1/2 my-2'>
+                                    <label htmlFor="pincode">Pincode:</label>
+                                    <input type="number" name='pincode' id="pincode" className='w-full border border-black' value={pincode} onChange={updatePincode} placeholder='000000' />
+                                </div>
+                                <div className='w-1/2 my-2'>
+                                    <label htmlFor="city">City Name:</label>
+                                    <input type="text" name='city' id='city' className='w-full border border-black' value={city} onChange={updateCity} placeholder='Your city' />
+                                </div>
+                            </div>
+
+                            <div className='w-full flex justify-between items-center gap-5'>
+                                <div className='w-1/2 my-2'>
+                                    <label htmlFor="add1">Address 1:</label>
+                                    <input type="text" name='add1' id="add1" className='w-full border border-black' value={addOne} onChange={updateAdd1} />
+                                </div>
+                                <div className='w-1/2 my-2'>
+                                    <label htmlFor="add2">Address 2:</label>
+                                    <input type="text" name='add2' id='add2' className='w-full border border-black' value={addTwo} onChange={updateAdd2} />
+                                </div>
                             </div>
                         </div>
 
 
-                        <div className='flex w-full justify-between items-center my-3'>
+                        <div className='bg-slate-300 w-full mt-10'>
+                            <h1 className='w-full text-center text-2xl bg-blue-400 py-3 rounded-t-xl text-white'>Event / Compitition Details</h1>
 
-                            <div>
-                                <label htmlFor="cardNum">Aadhar Card Number :</label>
-                                <input type="number" name="cardNum" id="cardNum" required={true} />
-                            </div>
 
-                            <div>
+                            <div className='w-full flex justify-between items-center gap-5'>
+                                <div className='w-[30%] my-2'>
+                                    <label htmlFor="event">Event Name:</label>
+                                    <select type="text" name='event' id="event" className='w-full border border-black' onChange={(event) => setOptionValue(event.target.value)}>
+                                        <option value="Sabre">Saber</option>
+                                        <option value="Foil">Foil</option>
+                                        <option value="Epee">Epee</option>
+                                    </select>
+                                </div>
 
-                                <label htmlFor="event">Event Name:</label>
-                                <input type="text" name="event" id="event" required={true} />
+                                <div className='w-[70%] my-3 gap-5 flex justify-between items-center'>
+                                    <div className='w-full bg-white  px-5 rounded-xl border border-black'>
+                                        <label htmlFor="file" className=' text-black text-lg flex items-center justify-between py-2 cursor-pointer  shadow-2xl  '>
+                                            {
+                                                photo
+                                                    ?
+                                                    <>
+                                                        <p className='text-green-900'>Uploaded</p> < IoCheckmarkDone className='text-green-900' />
+                                                    </>
+                                                    :
+                                                    <>
+                                                        <p className=''>Upload Your Profile Photo</p> <FiUpload className='text-black' />
+                                                    </>
+                                            }
+                                        </label>
+                                        <input type="file" name="file" id="file" accept='image/*' className='file bg-white' onChange={uploadPhoto} required={true} />
+                                    </div>
 
-                            </div>
+                                    <div className='w-full bg-white px-5 rounded-xl border border-black'>
+                                        <label htmlFor="aadharPhoto" className='text-black text-lg flex items-center justify-between py-2 cursor-pointer  shadow-2xl '>
+                                            {
+                                                aadharPhoto
+                                                    ?
+                                                    <>
+                                                        <p className='text-green-900'>Uploaded</p> <IoCheckmarkDone className='text-green-900' />
+                                                    </>
+                                                    :
+                                                    <>
+                                                        <p className=''>Upload Your Aadhar Card Photo</p>
+                                                        <FiUpload className='text-black' />
+                                                    </>
+                                            }
+                                        </label>
+                                        <input type="file" name="aadharPhoto" id="aadharPhoto" accept='image/*' className='file bg-white' onChange={uploadAadhar} required={true} />
+                                        <p></p>
+                                    </div>
+                                </div>
 
-                            <div>
-                                <label htmlFor="mail">Email:</label>
-                                <input type="email" name="mail" id="mail" required={true} />
 
                             </div>
                         </div>
 
-
-                        <div className='flex w-full justify-between items-center my-3'>
-                            <div>
-                                <label htmlFor="number">Phone:</label>
-                                <input type="number" name="number" id="number" required={true} />
-                            </div>
-
-                            <div>
-                                <label htmlFor="pincode">Pincode:</label>
-                                <input type="number" name="pincode" id="pincode" required={true} />
-                            </div>
-
-
-                            <div>
-                                <label htmlFor="schoolClgName">School/College Name:</label>
-                                <input type="text" name="schoolClgName" id="schoolClgName" required={true} />
-                            </div>
+                        <div>
+                            <button type="submit" className='text-white bg-blue-400 px-5 py-3 my-3 rounded-xl' onClick={sendFormData}>Submit Form</button>
                         </div>
-
-                        <label htmlFor="add1" className='mt-3'>Address 1:</label>
-                        <textarea name="add1" id="add1" className='h-[5rem] w-full rounded-xl px-10 py-3' required={true}></textarea>
-
-
-                        <label htmlFor="add2" className='mt-3'>Address 2:</label>
-                        <textarea name="add2" id="add2" className='h-[5rem] w-full rounded-xl px-10 py-3' required={true}></textarea>
-
-
-                        <div className='flex w-full justify-evenly items-center my-5 fileInput'>
-
-                            <div className='w-[20rem]'>
-                                <label htmlFor="file" className=' text-black'>
-                                    {
-                                        photo
-                                            ?
-                                            <>
-                                                <p className='text-green-900'>Uploaded</p> < IoCheckmarkDone className='text-green-900' />
-                                            </>
-                                            :
-                                            <>
-                                                <p>Upload Photo</p> <FiUpload className='text-black' />
-                                            </>
-                                    }
-                                </label>
-                                <input type="file" name="file" id="file" accept='image/*' className='file bg-white' onChange={uploadPhoto} required={true} />
-                            </div>
-
-                            <div className='w-[20rem]'>
-                                <label htmlFor="aadharPhoto" className='text-black'>
-                                    {
-                                        aadhar
-                                            ?
-                                            <>
-                                                <p className='text-green-900'>Uploaded</p> <IoCheckmarkDone className='text-green-900' />
-                                            </>
-                                            :
-                                            <>
-                                                <p>Upload Aadhar</p>
-                                                <FiUpload className='text-black' />
-                                            </>
-                                    }
-                                </label>
-                                <input type="file" name="aadharPhoto" id="aadharPhoto" accept='image/*' className='file bg-white' onChange={uploadAadhar} required={true} />
-                                <p></p>
-                            </div>
-                            <button type="submit" className='bg-white text-2xl rounded-xl px-5 py-3 my-3 font-bold' onClick={sendFormData}>Submit</button>
-                        </div>
-
-
-
-
-
-
                     </form>
-
-
                 </div>
             </div>
         </>
