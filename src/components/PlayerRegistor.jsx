@@ -1,7 +1,7 @@
 import React from 'react'
 import '../App.css'
 import { FiUpload } from "react-icons/fi";
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { IoCheckmarkDone } from "react-icons/io5";
 import Logo from "../assets/Logo.png"
 
@@ -9,20 +9,39 @@ import Logo from "../assets/Logo.png"
 
 const PlayerRegistor = () => {
 
-    const [photo, setphoto] = useState("");
-    const [gender, setGender] = useState("");
-    const [name, setName] = useState("");
-    const [phone, setPhone] = useState("");
-    const [mail, setMail] = useState("");
-    const [dob, setDob] = useState("");
-    const [aadhar, setAadhar] = useState("");
-    const [aadharPhoto, setAadharPhoto] = useState("");
-    const [eventName, setEventName] = useState("");
-    const [pincode, setPincode] = useState("");
-    const [city, setCity] = useState("");
-    const [addOne, setAddOne] = useState("");
-    const [addTwo, setAddTwo] = useState("");
-    const [optionValue, setOptionValue] = useState("");
+    // const [photo, setphoto] = useState("");
+    // const [gender, setGender] = useState("");
+    // const [name, setName] = useState("");
+    // const [phone, setPhone] = useState("");
+    // const [mail, setMail] = useState("");
+    // const [dob, setDob] = useState("");
+    // const [aadhar, setAadhar] = useState("");
+    // const [aadharPhoto, setAadharPhoto] = useState("")
+    // const [eventName, setEventName] = useState("");
+    // const [pincode, setPincode] = useState("");
+    // const [city, setCity] = useState("");
+    // const [addOne, setAddOne] = useState("");
+    // const [addTwo, setAddTwo] = useState("");
+    // const [optionValue, setOptionValue] = useState("");
+
+
+    const inputReference = useRef(null);
+
+    const [playerRegistorData, setPlayerRegistorData] = useState({
+        name: "",
+        mail: "",
+        phone: "",
+        gender: "",
+        dob: "",
+        city: "",
+        addOne: "",
+        addTwo: "",
+        pincode: "",
+        aadhar: "",
+        photo: "",
+        aadharPhoto: "",
+        eventName: "",
+    })
 
 
 
@@ -36,7 +55,8 @@ const PlayerRegistor = () => {
             document.getElementById("file").disabled = "false"
         }
         const fileUrl = URL.createObjectURL(file);
-        setphoto(fileUrl)
+        // setphoto(fileUrl)
+        setPlayerRegistorData(prevState => ({ ...prevState, photo: fileUrl }))
         console.log(fileUrl);
 
     }
@@ -52,61 +72,77 @@ const PlayerRegistor = () => {
 
         }
         const fileUrl = URL.createObjectURL(file);
-        setAadharPhoto(fileUrl)
+        setPlayerRegistorData(prevState => ({
+            ...prevState,
+            aadharPhoto: fileUrl
+        }))
         console.log(fileUrl);
     }
 
 
-
-    const sendFormData = (event) => {
-        event.preventDefault();
-        setName("")
-        setphoto("")
-        setGender("")
-        setAadharPhoto("")
-        setPhone("")
-        setAadhar("")
-        setMail("")
-        setDob("")
-        setEventName("")
-        setPincode("")
-        setCity("")
-        setAddOne("")
-        setAddTwo("")
-    }
+    let propertyName, propertyValue;
+    const handleResgistrationData = (event) => {
 
 
-    const updateName = (event) => {
-        setName(event.target.value)
+        // setName("")
+        // setphoto("")
+        // setGender("")
+        // setAadharPhoto("")
+        // setPhone("")
+        // setAadhar("")
+        // setMail("")
+        // setDob("")
+        // setPincode("")
+        // setCity("")
+        // setAddOne("")
+        // setAddTwo("")
+        propertyName = event.target.name;
+        propertyValue = event.target.value;
+
+        setPlayerRegistorData({ ...playerRegistorData, [propertyName]: propertyValue })
     }
 
-    const updateGender = (event) => {
-        setGender(event.target.value)
+
+    const sendFormData = (e) => {
+        e.preventDefault();
+
+        if (inputReference.current) {
+            inputReference.current.value = "";
+        }
     }
-    const updatePhone = (event) => {
-        setPhone(event.target.value)
-    }
-    const updateMail = (event) => {
-        setMail(event.target.value)
-    }
-    const updateDob = (event) => {
-        setDob(event.target.value)
-    }
-    const updateAadhar = (event) => {
-        setAadhar(event.target.value)
-    }
-    const updatePincode = (event) => {
-        setPincode(event.target.value)
-    }
-    const updateCity = (event) => {
-        setCity(event.target.value)
-    }
-    const updateAdd1 = (event) => {
-        setAddOne(event.target.value)
-    }
-    const updateAdd2 = (event) => {
-        setAddTwo(event.target.value)
-    }
+
+
+    // const updateName = (event) => {
+    //     setName(event.target.value)
+    // }
+
+    // const updateGender = (event) => {
+    //     setGender(event.target.value)
+    // }
+    // const updatePhone = (event) => {
+    //     setPhone(event.target.value)
+    // }
+    // const updateMail = (event) => {
+    //     setMail(event.target.value)
+    // }
+    // const updateDob = (event) => {
+    //     setDob(event.target.value)
+    // }
+    // const updateAadhar = (event) => {
+    //     setAadhar(event.target.value)
+    // }
+    // const updatePincode = (event) => {
+    //     setPincode(event.target.value)
+    // }
+    // const updateCity = (event) => {
+    //     setCity(event.target.value)
+    // }
+    // const updateAdd1 = (event) => {
+    //     setAddOne(event.target.value)
+    // }
+    // const updateAdd2 = (event) => {
+    //     setAddTwo(event.target.value)
+    // }
 
 
 
@@ -126,22 +162,22 @@ const PlayerRegistor = () => {
                             <div className='w-full flex justify-between items-center gap-5'>
                                 <div className='w-1/2 my-2'>
                                     <label htmlFor="name">Full Name:</label>
-                                    <input type="text" name='name' id="name" className='w-full border border-black' value={name} onChange={updateName} placeholder='Full Name' />
+                                    <input type="text" name='name' id="name" className='w-full border border-black' value={playerRegistorData.name} onChange={handleResgistrationData} placeholder='Full Name' ref={inputReference} />
                                 </div>
                                 <div className='w-1/2 my-2'>
                                     <label htmlFor="gender">Gender:</label>
-                                    <input type="text" name='gender' id='gender' className='w-full border border-black' value={gender} onChange={updateGender} placeholder='Male/Female/Others' />
+                                    <input type="text" name='gender' id='gender' className='w-full border border-black' value={playerRegistorData.gender} onChange={handleResgistrationData} placeholder='Male/Female/Others' ref={inputReference} />
                                 </div>
                             </div>
 
                             <div className='w-full flex justify-between items-center gap-5'>
                                 <div className='w-1/2 my-2'>
                                     <label htmlFor="phone">Phone:</label>
-                                    <input type="text" name='phone' id="phone" className='w-full border border-black' value={phone} onChange={updatePhone} placeholder='0000000000' />
+                                    <input type="text" name='phone' id="phone" className='w-full border border-black' value={playerRegistorData.phone} onChange={handleResgistrationData} placeholder='0000000000' ref={inputReference} />
                                 </div>
                                 <div className='w-1/2 my-2'>
                                     <label htmlFor="mail">E-Mail:</label>
-                                    <input type="email" name='mail' id='mail' className='w-full border border-black' value={mail} onChange={updateMail} placeholder='abc@xyz.com' />
+                                    <input type="email" name='mail' id='mail' className='w-full border border-black' value={playerRegistorData.mail} onChange={handleResgistrationData} placeholder='abc@xyz.com' ref={inputReference} />
                                 </div>
                             </div>
 
@@ -149,11 +185,11 @@ const PlayerRegistor = () => {
                             <div className='w-full flex justify-between items-center gap-5'>
                                 <div className='w-1/2 my-2'>
                                     <label htmlFor="dob">Date Of Birth:</label>
-                                    <input type="date" name='dob' id="dob" className='w-full border border-black' value={dob} onChange={updateDob} />
+                                    <input type="date" name='dob' id="dob" className='w-full border border-black' value={playerRegistorData.dob} onChange={handleResgistrationData} ref={inputReference} />
                                 </div>
                                 <div className='w-1/2 my-2'>
                                     <label htmlFor="aadhar">Aadhar Card Number:</label>
-                                    <input type="number" name='aadhar' id='aadhar' className='w-full border border-black' value={aadhar} onChange={updateAadhar} placeholder='0000-0000-0000' />
+                                    <input type="number" name='aadhar' id='aadhar' className='w-full border border-black' value={playerRegistorData.aadhar} onChange={handleResgistrationData} placeholder='0000-0000-0000' ref={inputReference} />
                                 </div>
                             </div>
 
@@ -167,22 +203,22 @@ const PlayerRegistor = () => {
                             <div className='w-full flex justify-between items-center gap-5'>
                                 <div className='w-1/2 my-2'>
                                     <label htmlFor="pincode">Pincode:</label>
-                                    <input type="number" name='pincode' id="pincode" className='w-full border border-black' value={pincode} onChange={updatePincode} placeholder='000000' />
+                                    <input type="number" name='pincode' id="pincode" className='w-full border border-black' value={playerRegistorData.pincode} onChange={handleResgistrationData} placeholder='000000' ref={inputReference} />
                                 </div>
                                 <div className='w-1/2 my-2'>
                                     <label htmlFor="city">City Name:</label>
-                                    <input type="text" name='city' id='city' className='w-full border border-black' value={city} onChange={updateCity} placeholder='Your city' />
+                                    <input type="text" name='city' id='city' className='w-full border border-black' value={playerRegistorData.city} onChange={handleResgistrationData} placeholder='Your city' ref={inputReference} />
                                 </div>
                             </div>
 
                             <div className='w-full flex justify-between items-center gap-5'>
                                 <div className='w-1/2 my-2'>
                                     <label htmlFor="add1">Address 1:</label>
-                                    <input type="text" name='add1' id="add1" className='w-full border border-black' value={addOne} onChange={updateAdd1} />
+                                    <input type="text" name='addOne' id="addOne" className='w-full border border-black' value={playerRegistorData.addOne} onChange={handleResgistrationData} ref={inputReference} />
                                 </div>
                                 <div className='w-1/2 my-2'>
                                     <label htmlFor="add2">Address 2:</label>
-                                    <input type="text" name='add2' id='add2' className='w-full border border-black' value={addTwo} onChange={updateAdd2} />
+                                    <input type="text" name='addTwo' id='addTwo' className='w-full border border-black' value={playerRegistorData.addTwo} onChange={handleResgistrationData} ref={inputReference} />
                                 </div>
                             </div>
                         </div>
@@ -195,18 +231,14 @@ const PlayerRegistor = () => {
                             <div className='w-full flex justify-between items-center gap-5'>
                                 <div className='w-[30%] my-2'>
                                     <label htmlFor="event">Event Name:</label>
-                                    <select type="text" name='event' id="event" className='w-full border border-black' onChange={(event) => setOptionValue(event.target.value)}>
-                                        <option value="Sabre">Saber</option>
-                                        <option value="Foil">Foil</option>
-                                        <option value="Epee">Epee</option>
-                                    </select>
+                                    <input type="text" name='eventName' id='eventName' className='w-full border border-black' value={playerRegistorData.eventName} onChange={handleResgistrationData} placeholder='Enter Event Name' ref={inputReference} />
                                 </div>
 
                                 <div className='w-[70%] my-3 gap-5 flex justify-between items-center'>
                                     <div className='w-full bg-white  px-5 rounded-xl border border-black'>
                                         <label htmlFor="file" className=' text-black text-lg flex items-center justify-between py-2 cursor-pointer  shadow-2xl  '>
                                             {
-                                                photo
+                                                playerRegistorData.photo
                                                     ?
                                                     <>
                                                         <p className='text-green-900'>Uploaded</p> < IoCheckmarkDone className='text-green-900' />
@@ -217,13 +249,13 @@ const PlayerRegistor = () => {
                                                     </>
                                             }
                                         </label>
-                                        <input type="file" name="file" id="file" accept='image/*' className='file bg-white' onChange={uploadPhoto} required={true} />
+                                        <input type="file" name="file" id="file" accept='image/*' className='file bg-white' onChange={uploadPhoto} required={true} ref={inputReference} />
                                     </div>
 
                                     <div className='w-full bg-white px-5 rounded-xl border border-black'>
                                         <label htmlFor="aadharPhoto" className='text-black text-lg flex items-center justify-between py-2 cursor-pointer  shadow-2xl '>
                                             {
-                                                aadharPhoto
+                                                playerRegistorData.aadharPhoto
                                                     ?
                                                     <>
                                                         <p className='text-green-900'>Uploaded</p> <IoCheckmarkDone className='text-green-900' />
@@ -235,7 +267,8 @@ const PlayerRegistor = () => {
                                                     </>
                                             }
                                         </label>
-                                        <input type="file" name="aadharPhoto" id="aadharPhoto" accept='image/*' className='file bg-white' onChange={uploadAadhar} required={true} />
+                                        <input type="file" name="aadharPhoto" id="aadharPhoto" accept='image/*' className='file bg-white'
+                                            onChange={uploadAadhar} required={true} ref={inputReference} />
                                         <p></p>
                                     </div>
                                 </div>

@@ -27,9 +27,9 @@ const Home = () => {
 
 
 
-                <div className='w-1/2'>
-                    <h1 className='text-[3rem] font-extrabold tracking-wide'>Join Our <br /> Fencing Club</h1>
-                    <p className='text-justify my-3'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur ex quo quibusdam dolores ullam sint voluptate sit quos eius, deleniti vel, nulla reprehenderit, cupiditate culpa sequi. Totam ut pariatur dolorem! Nobis hic veritatis ducimus sit ea at molestias. Quae reiciendis veniam doloremque enim recusandae maiores nobis unde. Labore, quisquam molestias?</p>
+                <div className='w-1/2' >
+                    <h1 className='text-[3rem] font-extrabold text-[#0e0e51] tracking-wide'>Join Our <br /> Fencing Club</h1>
+                    <p className='text-justify my-3 text-[#0e0e51]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur ex quo quibusdam dolores ullam sint voluptate sit quos eius, deleniti vel, nulla reprehenderit, cupiditate culpa sequi. Totam ut pariatur dolorem! Nobis hic veritatis ducimus sit ea at molestias. Quae reiciendis veniam doloremque enim recusandae maiores nobis unde. Labore, quisquam molestias?</p>
                     <p className='text-justify my-3'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur ex quo quibusdam dolores ullam sint voluptate sit quos eius?</p>
 
                     <button className='bg-sky-950 font-bold text-white text-2xl rounded-2xl px-7 py-3 hover:shadow-2xl duration-150'>Join Club</button>
@@ -45,24 +45,24 @@ const Home = () => {
 
 
             <div className='aboutSection px-12 py-10 rounded-2xl flex itemx-center justify-between gap-10 mt-10'>
-                <div className='w-1/2 aboutInfo text-sky-950'>
+                <div className='w-1/2 aboutInfo text-[#0e0e51]'>
                     <h2 className='text-[2rem] mt-2 underline underline-offset-4 font-extrabold'>WHO WE ARE</h2>
                     <h1 className='text-[3rem] mt-2 mb-5 underline underline-offset-4 font-extrabold'>A Legacy of Excellence</h1>
                     <p className="text-justify">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum ad voluptas, est saepe optio in minima voluptatum fuga fugiat nisi quisquam aut ea laborum soluta sed id accusamus, dicta quam distinctio quos a hic quaerat officia. Amet velit repellat, tempore quibusdam omnis laudantium, quod officiis eum error dicta enim pariatur inventore iste voluptas voluptatum corporis,</p>
                     <div className='grid grid-cols-2 gap-5 mt-10 font-bold'>
-                        <div className='flex flex-col justify-center items-center px-10 py-3 rounded-2xl bg-slate-400 gap-3'>
+                        <div className='flex flex-col justify-center items-center px-10 py-3 rounded-2xl bg-blue-gray-100 gap-3'>
                             <h1 className='text-2xl'>100+</h1>
                             <p>Players in Academy</p>
                         </div>
-                        <div className='flex flex-col justify-center items-center px-10 py-3 rounded-2xl bg-slate-400 gap-3'>
+                        <div className='flex flex-col justify-center items-center px-10 py-3 rounded-2xl  bg-blue-gray-100 gap-3'>
                             <h1 className='text-2xl'>10+</h1>
                             <p>International Players</p>
                         </div>
-                        <div className='flex flex-col justify-center items-center px-10 py-3 rounded-2xl bg-slate-400 gap-3'>
+                        <div className='flex flex-col justify-center items-center px-10 py-3 rounded-2xl bg-blue-gray-100 gap-3'>
                             <h1 className='text-2xl'>30+</h1>
                             <p>National Players</p>
                         </div>
-                        <div className='flex flex-col justify-center items-center px-10 py-3 rounded-2xl bg-slate-400 gap-3'>
+                        <div className='flex flex-col justify-center items-center px-10 py-3 rounded-2xl bg-blue-gray-100 gap-3'>
                             <h1 className='text-2xl'>50+</h1>
                             <p>State Players</p>
                         </div>
