@@ -1,3 +1,10 @@
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
 html {
     font-family: "Exo", monospace;
     user-select: none;
@@ -29,13 +36,29 @@ body {
 
 input {
     color: black !important;
-    height: 2rem;
+    height: 3rem;
     border-radius: 5px;
     padding: 0px 5px;
 }
 
+.genderDiv {
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 select {
-    height: 2rem
+    width: 80%;
+    color: black !important;
+    height: 3rem;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 0px 5px;
+}
+
+option {
+    margin-right: 100px;
 }
 
 .file {
