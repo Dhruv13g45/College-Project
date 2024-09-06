@@ -12,6 +12,7 @@ import { FaFacebookSquare } from "react-icons/fa";
 import { CiYoutube } from "react-icons/ci";
 import PlayerRegistor from './PlayerRegistor.jsx'
 import PlayerLogin from './PlayerLogin.jsx'
+import MatchesPlayed from './MatchesPlayed.jsx'
 
 const Navbar = () => {
     return (
@@ -62,6 +63,7 @@ const Navbar = () => {
                 <Route path="account" element={<Account />}>
                     <Route path='certificates' element={<Certificates />} />
                     <Route path='docs' element={<Documents />} />
+                    <Route path="matchesPlayed" element={<MatchesPlayed />} />
                 </Route>
             </Routes>
 

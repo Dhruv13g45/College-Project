@@ -31,6 +31,7 @@ const PlayerRegistor = () => {
 
 
 
+
     const uploadPhoto = (event) => {
         const file = event.target.files[0];
         if (file === "") {
@@ -74,7 +75,6 @@ const PlayerRegistor = () => {
 
     const sendFormData = (e) => {
         e.preventDefault();
-        console.log(playerRegistorData)
 
         setPlayerRegistorData({
             fullName: "",
@@ -91,9 +91,7 @@ const PlayerRegistor = () => {
             aadharCardPhoto: "",
             eventName: "",
         })
-        console.log(playerRegistorData)
     }
-
 
 
 

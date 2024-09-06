@@ -2,6 +2,10 @@ import { React, useRef, useState } from 'react'
 import PlayerLoginImage from "../assets/PlayerLoginImage.png"
 import Logo from "../assets/Logo.png"
 import "../App.css"
+import { useDispatch } from "react-redux"
+import { useSelector } from 'react-redux'
+import { changePlayerLogin } from '../store/slice/playerAccount'
+
 
 const PlayerLogin = () => {
 
@@ -9,12 +13,14 @@ const PlayerLogin = () => {
     const inputReference = useRef(null);
 
 
+
+
     const [playerLogin, setPlayerLogin] = useState({
         aadhar: "",
         dob: "",
     })
 
-    const [storePlayerLoginData, setStorePlayerLoginData] = useState({});
+    const [storePlayerLoginData, setStorePlayerLoginData] = useState({});  //send state on backend
 
 
 
@@ -27,16 +33,15 @@ const PlayerLogin = () => {
 
     }
 
+    const dispatch = useDispatch();
     const sendPlayerLoginData = (event) => {
         event.preventDefault();
-
         if (playerLogin.aadhar.length != 12) {
-            document.getElementById("aadhar").value = "Aadhar card number cannot be more than 12 characters"
-            console.log("changed the string and stored the value")
+            alert("Aadhar Card cannot contain more than 12 characters")
         }
         else {
             setStorePlayerLoginData(playerLogin)
-            console.log("stored the value without changing")
+            dispatch(changePlayerLogin({ type: 'TOGGLE' }));
         }
 
 
