@@ -21,8 +21,10 @@ body {
     background: url("./assets/HeroBg.png");
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;
+    background-size: 100% 100%;
 }
+
+
 
 
 
@@ -86,4 +88,17 @@ option {
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+
+
+@media(max-width=960px) {
+    .aboutInfo {
+        background-image: url("./assets/FencerDesign.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        font-weight: bolder;
+        z-index: -99;
+    }
 }
