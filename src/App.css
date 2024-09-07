@@ -80,3 +80,10 @@ option {
     gap: 20px;
     cursor: pointer;
 }
+
+.accountPage {
+    background-image: linear-gradient(to top, rgb(19, 126, 249), rgb(0, 106, 255));
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}

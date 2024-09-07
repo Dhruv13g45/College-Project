@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import playerReducer from "./slice/playerAccount"
+import playerAccountReducer from "./slice/playerAccount"
 export const store = configureStore({
     reducer: {
-        checkPlayerAccount: playerReducer,
+        playerStatus: playerAccountReducer,
     }
 })

@@ -1,18 +1,18 @@
-import { React, useRef, useState } from 'react'
+import { React, useEffect, useRef, useState } from 'react'
 import PlayerLoginImage from "../assets/PlayerLoginImage.png"
 import Logo from "../assets/Logo.png"
 import "../App.css"
-import { useDispatch } from "react-redux"
-import { useSelector } from 'react-redux'
-import { changePlayerLogin } from '../store/slice/playerAccount'
+import { useDispatch, useSelector } from 'react-redux'
+import { changePlayerAccountStatus, checkPlayerAccountStatus } from '../store/slice/playerAccount'
+
 
 
 const PlayerLogin = () => {
 
 
     const inputReference = useRef(null);
-
-
+    const dispatch = useDispatch();
+    const status = useSelector(checkPlayerAccountStatus);
 
 
     const [playerLogin, setPlayerLogin] = useState({
@@ -33,21 +33,31 @@ const PlayerLogin = () => {
 
     }
 
-    const dispatch = useDispatch();
+
+
+
+    useEffect(() => {
+        console.log(status)
+    }, [status])
     const sendPlayerLoginData = (event) => {
         event.preventDefault();
         if (playerLogin.aadhar.length != 12) {
             alert("Aadhar Card cannot contain more than 12 characters")
         }
         else {
+
             setStorePlayerLoginData(playerLogin)
-            dispatch(changePlayerLogin({ type: 'TOGGLE' }));
+            console.log(status);
+            dispatch(changePlayerAccountStatus())
+            console.log(status);
         }
 
 
-        if (inputReference.current) {
-            inputReference.current.value = "";
-        }
+        setPlayerLogin({
+            aadhar: "",
+            dob: "",
+        })
+        console.log(playerLogin)
     }
 
 

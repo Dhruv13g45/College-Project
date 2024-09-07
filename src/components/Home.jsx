@@ -32,7 +32,7 @@ const Home = () => {
                     <p className='text-justify my-3 text-[#0e0e51]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur ex quo quibusdam dolores ullam sint voluptate sit quos eius, deleniti vel, nulla reprehenderit, cupiditate culpa sequi. Totam ut pariatur dolorem! Nobis hic veritatis ducimus sit ea at molestias. Quae reiciendis veniam doloremque enim recusandae maiores nobis unde. Labore, quisquam molestias?</p>
                     <p className='text-justify my-3'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur ex quo quibusdam dolores ullam sint voluptate sit quos eius?</p>
 
-                    <button className='bg-sky-950 font-bold text-white text-2xl rounded-2xl px-7 py-3 hover:shadow-2xl duration-150'>Join Club</button>
+                    <button className='font-bold border border-[#0e0e51] text-[#0e0e51] text-2xl rounded-2xl px-7 py-3 hover:shadow-2xl duration-150'>Join Club</button>
                 </div>
 
 

@@ -1,27 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+    value: false,
+}
+
 const playerAccount = createSlice(
     {
-        name: "playerAccount",
-        initialState: false,
-        reducers:
-        {
-            changePlayerLogin: (state, action) => {
-                switch (action.payload) {
-                    case 'TOGGLE': return !state;
-                    default: return state;
-                }
+        name: "playerStatus",
+        initialState,
+        reducers: {
+            changePlayerAccountStatus: (state) => {
+                state.value = !state.value;
             },
-            changePlayerRegistor: (state, action) => {
-                switch (action.payload) {
-                    case 'TOGGLE': return !state;
-                    default: return state;
-                }
-            },
+
         }
+
     }
 )
 
-export const { changePlayerLogin, changePlayerRegistor } = playerAccount.actions;
+export const { changePlayerAccountStatus } = playerAccount.actions;
+export const checkPlayerAccountStatus = (state) => state.playerStatus.value;
 
 export default playerAccount.reducer;
