@@ -2,8 +2,11 @@ import React from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import Logo from "../assets/Logo.png"
 import "../App.css"
-
-
+import { TiTick } from "react-icons/ti";
+import { CiViewList } from "react-icons/ci";
+import { FaRegClock } from "react-icons/fa";
+import { LiaCertificateSolid } from "react-icons/lia";
+import { LuSwords } from "react-icons/lu";
 
 
 const Account = () => {
@@ -11,41 +14,30 @@ const Account = () => {
 
     return (
         <>
-            <div className=' w-full h-[100vh] accountPage pt-24 px-10'>
-
-
-                <div className='w-full flex justify-between bg-white rounded-3xl items-start gap-10 px-10'>
-                    <div className='information w-[30%] flex flex-col gap-5'>
-                        <img src={Logo} alt="profile-photo" className='w-[200px] h-[200px]' />
-                        <h1 className='text-xl'>Name : Dhruv Goradia</h1>
-                        <h1 className='text-xl'>Gender : Male</h1>
-                        <h1 className='text-xl'>Dob : 13-12-2004</h1>
-                        <h1 className='text-xl'>School/College : S.R.Chandak School</h1>
-                        <h1 className='text-xl'>Aadhar number : 123456789102</h1>
-                        <h1 className='text-xl'>Status: Verified</h1>
-
-                    </div>
-
-
-                    <div className='w-[70%] flex justify-between items-start gap-10 rounded-3xl'>
-
-                        <div className='w-full  flex flex-col justify-between gap-5 text-2xl mt-7'>
-                            <div className='w-full bg-yellow-500 p-5 rounded-xl flex justify-between items-center'>
-                                <NavLink to="certificates" className={({ isActive }) => `${isActive ? "border border-black rounded-3xl hover:no-underline px-5 py-3" : "text-black"} duration-200 ease-in-out`}>Certificates</NavLink>
-                                <NavLink to="docs" className={({ isActive }) => `${isActive ? "border border-black rounded-3xl hover:no-underline px-5 py-3" : "text-black"} duration-200 ease-in-out`}>Documents</NavLink>
-                                <NavLink to="matchesPlayed" className={({ isActive }) => `${isActive ? "border border-black rounded-3xl hover:no-underline px-5 py-3" : "text-black"} duration-200 ease-in-out`}>Matches Played</NavLink>
-                            </div>
-
-                            <div className='w-full items-right'>
-                                <Outlet />
-                            </div>
+            <div className=' w-full accountPage pt-24 px-10'>
+                <div className='bg-white rounded-3xl flex justify-between items-start'>
+                    <div className='p-5 w-[30%]'>
+                        <img src={Logo} alt="profile-photo" className=' border border-black rounded-3xl' />
+                        <div className='mt-5 gap-5 flex flex-col '>
+                            <h1>Name : Dhruv Goradia</h1>
+                            <h2>School/College Name : HNCC</h2>
+                            <h3 className='flex text-lg items-center'>Verification :<span className='flex items-center'>  Verified <TiTick className='text-3xl text-green-800' /></span></h3>
+                        </div>
+                        <div className='flex flex-col gap-5 mt-5 font-bold'>
+                            <NavLink to="" className="border border-[#0b0b51] rounded-xl p-3 text-[#0b0b51] flex w-full items-center justify-evenly">Personal Details < CiViewList className='text-3xl' /></NavLink>
+                            <NavLink to="upcomingTournaments" className="border border-[#0b0b51] rounded-xl p-3 flex w-full items-center justify-evenly text-[#0b0b51]">Upcoming  <FaRegClock className='text-3xl' /></NavLink>
+                            <NavLink to="certificates" className="border border-[#0b0b51] rounded-xl p-3 flex w-full items-center justify-evenly text-[#0b0b51]">Certificates <LiaCertificateSolid className='text-3xl' /></NavLink>
+                            <NavLink to="matchesPlayed" className="border border-[#0b0b51] rounded-xl p-3 flex w-full items-center justify-evenly text-[#0b0b51]">Matches Played <LuSwords className='text-3xl' /></NavLink>
                         </div>
                     </div>
+
+                    <div className='w-[70%] p-5'>
+                        <Outlet />
+                    </div>
+
+
+
                 </div>
-
-
-
-
             </div>
         </>
     )

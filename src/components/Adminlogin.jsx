@@ -25,7 +25,7 @@ const Adminlogin = () => {
                                 <input type="password" name="password" id="password" className='w-full h-[3rem] font-bold px-3 border border-black text-black my-2' placeholder='Your Password' />
                             </div>
                         </div>
-                        <div className=''>
+                        <div>
                             <button type="submit" className='text-xl text-white font-bold px-5 py-3 rounded-lg bg-blue-500 mb-5'>Login</button>
                         </div>
                     </div>

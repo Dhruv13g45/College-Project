@@ -1,7 +1,7 @@
 import React from 'react'
 import '../App.css'
 import { FiUpload } from "react-icons/fi";
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { IoCheckmarkDone } from "react-icons/io5";
 import Logo from "../assets/Logo.png"
 
@@ -9,9 +9,6 @@ import Logo from "../assets/Logo.png"
 
 const PlayerRegistor = () => {
 
-
-
-    // const inputReference = useRef(null);
 
     const [playerRegistorData, setPlayerRegistorData] = useState({
         fullName: "",

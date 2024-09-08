@@ -5,7 +5,6 @@ import Home from "./Home.jsx"
 import Account from "./Account.jsx"
 import Adminlogin from "./Adminlogin.jsx"
 import Certificates from "./Certificates.jsx"
-import Documents from "./Documents.jsx"
 import Logo from '../assets/Logo.png'
 import { FaInstagram } from "react-icons/fa";
 import { FaFacebookSquare } from "react-icons/fa";
@@ -13,7 +12,8 @@ import { CiYoutube } from "react-icons/ci";
 import PlayerRegistor from './PlayerRegistor.jsx'
 import PlayerLogin from './PlayerLogin.jsx'
 import MatchesPlayed from './MatchesPlayed.jsx'
-import DummyComponent from './DummyComponent.jsx'
+import UpcomingTournaments from './UpcomingTournaments.jsx'
+import PersonalDetails from './PersonalDetails.jsx'
 
 
 
@@ -72,9 +72,9 @@ const Navbar = () => {
                 <Route path='playerLogin' element={<PlayerLogin />} />
                 <Route path='playerRegistor' element={<PlayerRegistor />} />
                 <Route path="account" element={<Account />}>
-                    <Route index element={<DummyComponent />} />
+                    <Route index element={<PersonalDetails />} />
                     <Route path='certificates' element={<Certificates />} />
-                    <Route path='docs' element={<Documents />} />
+                    <Route path='upcomingTournaments' element={<UpcomingTournaments />} />
                     <Route path="matchesPlayed" element={<MatchesPlayed />} />
                 </Route>
             </Routes>
