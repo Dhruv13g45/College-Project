@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const PlayerRegister = () => {
   const [formData, setFormData] = useState({
@@ -69,18 +71,16 @@ const PlayerRegister = () => {
       console.log("post req is made");
 
       console.log(response.data);
-      alert("Player registered successfully!");
-      navigate("/playerLogin")
+      toast.success("Player registered successfully!");
+      toast("An email is sent to your account")
     } catch (error) {
-      console.log(error);
-
-      console.error("There was an error registering the player!", error);
-      alert("There was an error registering the player.");
+      toast.error("There was an error registering the player.");
     }
   };
 
   return (
      <div className="bg-gradient-to-b from-blue-700 to-blue-500 min-h-screen px-5 flex justify-center items-center">
+      <Toaster />
       <form
         onSubmit={handleSubmit}
         encType="multipart/form-data"

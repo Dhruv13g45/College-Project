@@ -1,12 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../App.css";
 import Club from "./Club.jsx";
 import FencerDesign from "../assets/FencerDesign.png";
 import DisplayChampionsResults from "./DisplayChampionsResults.jsx";
 import DisplayLatestTournaments from "./DisplayLatestTournaments.jsx";
 import DisplayTeamResults from "./DisplayTeamResults.jsx";
+import axios from "axios";
+
+
 
 const Home = () => {
+
+
+  const [players,setPlayers] = useState("")
+
+const fetchPlayers = async()=>{
+  let res = await axios.get("http://localhost:3500/players/all-players");
+  let data =  res;
+  
+  let dataCount = data.data.length;
+
+  setPlayers(dataCount)
+}
+
+useEffect(()=>{
+  fetchPlayers();
+},[])
+    
+
+
+
   return (
     <>
       {/* Hero Section */}
@@ -34,10 +57,10 @@ const Home = () => {
 
             <div className="grid grid-cols-2 gap-6 mt-6 font-bold">
               {[
-                { label: "Players in Academy", count: "100+" },
+                { label: "Players in Academy", count: `${players}` },
                 { label: "International Players", count: "10+" },
-                { label: "National Players", count: "30+" },
-                { label: "State Players", count: "50+" },
+                { label: "National Players", count: "12+" },
+                { label: "State Players", count: "15+" },
               ].map((item, index) => (
                 <div
                   key={index}

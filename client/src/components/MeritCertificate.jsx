@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const MeritCertificate = () => {
   const [tournament, setTournament] = useState([]);
@@ -33,84 +35,97 @@ const MeritCertificate = () => {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
-      alert("Merit Certificate Added Successfully");
-      console.log(response.data);
+      toast.success("Uploaded the certificate") 
     } catch (error) {
-      console.error("Error uploading certificate:", error);
+      toast.error("Error uploading certificate");
     }
   };
 
   const fetchTournaments = async () => {
     try {
-    
-      let response = await axios.get("http://localhost:3500/admin/getAllTournaments");
+      let response = await axios.get(
+        `http://localhost:3500/admin/get-played-tournament`
+      );
       setTournament(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-  const fetchPlayers = async(tid)=>{
-    let response = await axios.get(`http://localhost:3500/players/all-players/${Number(tid)}`)
-    setPlayers(response.data)
-  }
+  const fetchPlayers = async (tid) => {
+    let response = await axios.get(
+      `http://localhost:3500/players/all-players/${Number(tid)}`
+    );
+    setPlayers(response.data);
+  };
 
   useEffect(() => {
     fetchTournaments();
   }, []);
 
   return (
-    <div className="w-full max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-6 mt-6">
-      <h1 className="text-center font-bold text-2xl text-gray-800 mb-6">Add Merit Certificate</h1>
-      <form onSubmit={addMerit} className="space-y-5">
-        
-        
+    <div className="w-full rounded-xl shadow-xl p-8 mt-8">
+      <Toaster />
+      <h1 className="text-center font-extrabold text-3xl text-gray-800 mb-8">
+        Add Merit Certificate
+      </h1>
+      <form onSubmit={addMerit} className="space-y-6">
         <div className="flex flex-col">
-          <label className="font-semibold text-gray-700">Tournament Title</label>
+          <label className="font-semibold text-gray-700 text-lg mb-2">
+            Tournament Title
+          </label>
           <select
-            className="p-2 border rounded-md focus:ring focus:ring-blue-300"
+            className="p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 transition duration-300"
             name="tid"
-            onChange={ (e)=>{
+            onChange={(e) => {
               handleDataChange(e);
-              fetchPlayers(e.target.value)}
-            }
+              fetchPlayers(e.target.value);
+            }}
           >
             <option value="">Select Tournament</option>
             {tournament.map((t) => (
-              <option key={t.tid} value={t.tid}>{t.title}</option>
+              <option key={t.tid} value={t.tid}>
+                {t.title}
+              </option>
             ))}
           </select>
         </div>
 
         <div className="flex flex-col">
-          <label className="font-semibold text-gray-700">Player Name</label>
+          <label className="font-semibold text-gray-700 text-lg mb-2">
+            Player Name
+          </label>
           <select
-            className="p-2 border rounded-md focus:ring focus:ring-blue-300"
+            className="p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 transition duration-300"
             name="pid"
-            onChange={(e)=>{
-              handleDataChange(e)
+            onChange={(e) => {
+              handleDataChange(e);
             }}
           >
             <option value="">Select Player</option>
             {players.map((player) => (
-              <option key={player.pid} value={player.pid}>{player.fullName}</option>
+              <option key={player.pid} value={player.pid}>
+                {player.fullName}
+              </option>
             ))}
           </select>
         </div>
-        
+
         <div className="flex flex-col">
-          <label className="font-semibold text-gray-700">Upload Certificate</label>
+          <label className="font-semibold text-gray-700 text-lg mb-2">
+            Upload Certificate
+          </label>
           <input
             type="file"
             onChange={handlePhotoChange}
-            className="p-2 border rounded-md focus:ring focus:ring-blue-300"
+            className="p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 transition duration-300"
             name="path"
           />
         </div>
-        
+
         <button
           type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition duration-300"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-md shadow-md transform transition-all hover:scale-105 duration-300"
         >
           Add Merit Certificate
         </button>

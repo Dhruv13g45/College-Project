@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 
 const PlayerRequestQueue = () => {
   const [requests, setRequests] = useState([]);
@@ -53,6 +54,7 @@ const PlayerRequestQueue = () => {
 
   return (
     <div className="p-4">
+      <Toaster />
       <h1 className="text-2xl font-bold mb-4">Player Request Queue</h1>
       <div className="overflow-x-auto">
         <table className="table-auto w-full text-left rounded-lg">

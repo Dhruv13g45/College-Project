@@ -1,12 +1,11 @@
 import React from "react";
 import { Link, Routes, Route, Outlet,Navigate, useNavigate } from "react-router-dom";
 import Tournaments from "./Tournaments.jsx";
-import ParticipationCertificate from "./ParticipationCertificate.jsx";
-import MeritCertificate from "./MeritCertificate.jsx";
 import PlayerRequestQueue from "./PlayerRequestQueue.jsx";
 import PlayerList from "./PlayerList.jsx";
 import { useEffect } from "react";
-import CreateEntry from "./CreateEntry.jsx";
+import toast, { Toaster } from 'react-hot-toast';
+
 import Result from "./Result.jsx";
 import Cookies from 'js-cookie'
 
@@ -19,6 +18,7 @@ const AdminProfile = () => {
       let isLoggedIn;
       if(Cookies.get('loginState')){
         isLoggedIn = true;
+        toast.success("LoggedIn Successfully")
       }
       if(!isLoggedIn){
         navigate("/admin");
@@ -34,6 +34,7 @@ const AdminProfile = () => {
 
   return (
     <>
+    <Toaster />
     <div className="flex flex-col min-h-screen text-black">
       {/* Header Section */}
       <header className="bg-white text-black shadow-lg py-4 px-6 flex justify-between items-center">
@@ -62,30 +63,14 @@ const AdminProfile = () => {
           >
             Tournaments
           </Link>
-          <Link
-            to="participationCertificate"
-            className="block bg-blue-500 text-white px-4 py-2 rounded text-center hover:bg-blue-600"
-          >
-            Add Participation Certificate
-          </Link>
-          <Link
-            to="meritCertificate"
-            className="block bg-blue-500 text-white px-4 py-2 rounded text-center hover:bg-blue-600"
-          >
-            Add Merit Certificate
-          </Link>
+          
           <Link
             to="playerList"
             className="block bg-blue-500 text-white px-4 py-2 rounded text-center hover:bg-blue-600"
           >
             See All Players List
           </Link>
-          <Link
-            to="createEntry"
-            className="block bg-blue-500 text-white px-4 py-2 rounded text-center hover:bg-blue-600"
-          >
-            Create Player Entry
-          </Link>
+          
           <Link
             to="createResultEntry"
             className="block bg-blue-500 text-white px-4 py-2 rounded text-center hover:bg-blue-600"
@@ -100,10 +85,7 @@ const AdminProfile = () => {
             <Route path="/" element={<Navigate to="playerRequests" replace />} />
             <Route path="playerRequests" element={<PlayerRequestQueue />} />
             <Route path="tournaments" element={<Tournaments />} />
-            <Route path="participationCertificate" element={<ParticipationCertificate />} />
-            <Route path="meritCertificate" element={<MeritCertificate />} />
             <Route path="playerList" element={<PlayerList />} />
-            <Route path="createEntry" element={<CreateEntry />} />
             <Route path="createResultEntry/*" element={<Result/>} />
           </Routes>
 

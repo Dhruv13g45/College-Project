@@ -1,5 +1,5 @@
 import express from 'express';
-import { handleGetRequestdPlayers , handleAcceptPlayer ,handleRejectPlayer ,handleAddTournament ,handleAddMeritCertificate ,handleAddParticipationCertificate ,handleAddIndividualResult,handleAddTeamResult,handleGetAllTournament,handleAddChampionshipResult,handleEventSort,handleCreateEntry,handleGetTentry,handleGetLatestTournaments,handleGetChampionshipResult , handleGetIndividual,handleGetTeamResult} from "../controllers/admin.controller.js"
+import { handleGetRequestdPlayers , handleAcceptPlayer ,handleRejectPlayer ,handleAddTournament ,handleAddMeritCertificate ,handleAddParticipationCertificate ,handleAddIndividualResult,handleAddTeamResult,handleGetAllTournament,handleAddChampionshipResult,handleEventSort,handleCreateEntry,handleGetTentry,handleGetLatestTournaments,handleGetChampionshipResult , handleGetIndividual,handleGetTeamResult,handleGetPlayedTournament} from "../controllers/admin.controller.js"
 import { upload } from "../middlewares/multer.middelware.js";
 
 const router = express.Router()
@@ -18,6 +18,7 @@ router.post("/reject-player/:pid" , handleRejectPlayer)
 //toutnament update related routes
 router.post("/add-tournament" , handleAddTournament)
 router.get("/getAllTournaments" ,handleGetAllTournament)
+router.get("/get-played-tournament",handleGetPlayedTournament)
 
 
 //certificate update related routs

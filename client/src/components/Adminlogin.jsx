@@ -3,12 +3,14 @@ import AdminBg from "../assets/AdminBg.png";
 import Logo from "../assets/Logo.png";
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie'
+import toast, { Toaster } from 'react-hot-toast';
 
 const Adminlogin = () => {
     const [adminId, setAdminId] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
+    const notify = ()=>toast.error("Enter right credentials")
 
     const validateForm = () => {
         let newErrors = {};
@@ -18,6 +20,7 @@ const Adminlogin = () => {
         }
 
         if (!password) {
+            
             newErrors.password = "Password is required";
         }
 
@@ -31,15 +34,15 @@ const Adminlogin = () => {
 
         if (adminId === "admin" && password === "admin@123") {
             Cookies.set('loginState','adminLoggedIn');
-            alert("Login Successful");
             navigate("/adminProfile");
         } else {
-            alert("Invalid Admin ID or Password");
+            notify()
         }
     };
 
     return (
         <>
+        <Toaster />
             <div className='w-full h-[89vh] bg-blue-700 px-28 flex justify-center items-center'>
                 <form method='POST' className='w-[80%] bg-white rounded-2xl gap-5 flex justify-between items-center' onSubmit={logAdmin}>
                     <div className="w-1/2 h-[100%]">

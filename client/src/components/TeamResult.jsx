@@ -11,7 +11,7 @@ const TeamResult = () => {
     const[event,setEvent] = useState("Sabre")
 
     const fetchTournaments = async() =>{
-        const resp = await axios.get("http://localhost:3500/admin/getAllTournaments");
+        const resp = await axios.get("http://localhost:3500/admin/get-played-tournament");
         setAllTournaments(resp.data)
     }
 

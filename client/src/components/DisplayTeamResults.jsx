@@ -12,7 +12,7 @@ const DisplayTeamResults = () => {
 
   const getTournaments = async () => {
     try {
-      const res = await axios.get("http://localhost:3500/admin/getAllTournaments");
+      const res = await axios.get("http://localhost:3500/admin/get-played-tournament");
       setTournaments(res.data);
     } catch (error) {
       console.error("Error fetching tournaments:", error);

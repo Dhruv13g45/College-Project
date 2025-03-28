@@ -1,110 +1,119 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const ChampionResult = () => {
+  const [Alltournaments, setAllTournaments] = useState([]);
+  const [singleTournament, setSingleTournament] = useState("");
+  const [gender, setGender] = useState("M");
+  const [position, setPosition] = useState("First");
 
-    const[Alltournaments,setAllTournaments] = useState([]);
-    const[singleTournament,setSingleTournament] = useState("");
-    const[gender,setGender] = useState("M")
-    const[position,setPosition] = useState("First")
+  const fetchTournaments = async () => {
+    const resp = await axios.get("http://localhost:3500/admin/get-played-tournament");
+    setAllTournaments(resp.data);
+  };
 
-    const fetchTournaments = async() =>{
-        const resp = await axios.get("http://localhost:3500/admin/getAllTournaments");
-        setAllTournaments(resp.data)
+  const selectSingletournament = (e) => {
+    setSingleTournament(e.target.value);
+  };
+
+  const selectGender = (e) => {
+    setGender(e.target.value);
+  };
+
+  const selectPosition = (e) => {
+    setPosition(e.target.value);
+  };
+
+  const addChamptionResult = async () => {
+    try {
+      let data = {
+        tid: Number(singleTournament),
+        gender: gender,
+        position: position,
+      };
+      const res = await axios.post("http://localhost:3500/admin/add-result/championship", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      toast.success("Result added successfully")
+    } catch (error) {
+      toast.error("Error adding result")
     }
+  };
 
-    const selectSingletournament = (e)=>{
-        setSingleTournament(e.target.value);
-    }
+  useEffect(() => {
+    fetchTournaments();
+  }, []);
 
-    const selectGender = (e) =>{
-        setGender(e.target.value)
-        console.log(e.target.value);
-    }
+  return (
+    <div className="w-full max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-8 mt-8">
+      <Toaster/>
+      <h1 className="text-center font-extrabold text-3xl text-gray-800 mb-8">
+        Championship Results
+      </h1>
 
-    const selectPosition = (e) =>{
-        setPosition(e.target.value)
-        console.log(e.target.value);
-    }
+      <table className="w-full text-left rounded-lg shadow-md">
+        <thead className="bg-gradient-to-r from-blue-500 to-teal-400 text-white">
+          <tr>
+            <th scope="col" className="px-6 py-3 font-semibold">Tournament Name</th>
+            <th scope="col" className="px-6 py-3 font-semibold">Gender</th>
+            <th scope="col" className="px-6 py-3 font-semibold">Position</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className="bg-white border-b">
+            <td className="px-6 py-4">
+              <select
+                value={singleTournament}
+                onChange={selectSingletournament}
+                className="p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 w-full"
+              >
+                <option value="">Select Tournament</option>
+                {Alltournaments.map((tournament) => (
+                  <option value={tournament.tid} key={tournament.tid}>
+                    {tournament.title}
+                  </option>
+                ))}
+              </select>
+            </td>
+            <td className="px-6 py-4">
+              <select
+                onChange={selectGender}
+                value={gender}
+                className="p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 w-full"
+              >
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+              </select>
+            </td>
+            <td className="px-6 py-4">
+              <select
+                onChange={selectPosition}
+                value={position}
+                className="p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 w-full"
+              >
+                <option value="First">1st</option>
+                <option value="Second">2nd</option>
+                <option value="Third">3rd</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-    const addChamptionResult = async()=>{
-        let data = {
-            tid:Number(singleTournament),
-            gender:gender,
-            position:position,
-        }
-        const res = await axios.post("http://localhost:3500/admin/add-result/championship", data,{
-            headers:{
-                "Content-Type": "application/json",
-            },
-        });
-        console.log(res.data);
-        
-    }
-    
+      <div className="mt-6">
+        <button
+          onClick={addChamptionResult}
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-md transition transform hover:scale-105 shadow-lg"
+        >
+          Add Champion Result
+        </button>
+      </div>
+    </div>
+  );
+};
 
-
-
-    useEffect(()=>{
-        fetchTournaments()
-    },[])
-
-    return (
-        <div>
-
-
-
-            <table className="relative overflow-x-auto w-full text-sm text-left rtl:text-right bg-yellow-600">
-                <thead className="text-xs text-gray-900 uppercase">
-                    <tr>
-                        <th scope="col" className="px-6 py-3">
-                            Tournament Name
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            Gender
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            Position
-                        </th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr className="bg-white">
-                        <td scope="row" className="px-6 py-4 font-medium text-black whitespace-nowrap">
-                        <select value={singleTournament} onChange={selectSingletournament}>
-                            <option value="Select Tournament">Select Tournament</option>
-                         {
-                            Alltournaments.map((tournament)=>(
-                                <option value={tournament.tid} key={tournament.tid}>{tournament.title}</option>
-                            ))
-                         }
-                        </select>
-                        </td>
-                        <td className="px-6 py-4">
-                            <select onChange={selectGender} value={gender}>
-                                <option value="M">Male</option>
-                                <option value="F">Female</option>
-                            </select>
-                        </td>
-                        <td className="px-6 py-4">
-                        <select onChange={selectPosition} value={position}>
-                                <option value="First">1st</option>
-                                <option value="Second">2nd</option>
-                                <option value="Third">3rd</option>
-                            </select>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-
-            <button className="bg-blue-600 text-white rounded-lg p-3 active:bg-blue-700" onClick={addChamptionResult}>
-              Add Champion Result
-            </button>
-
-        </div>
-    )
-}
-
-export default ChampionResult
+export default ChampionResult;

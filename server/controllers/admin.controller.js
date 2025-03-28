@@ -89,7 +89,15 @@ const handleGetAllTournament =async (req,res) => {
    res.send(allTournaments)
 }
 
+const handleGetPlayedTournament = async (req,res)=>{
+   const allTournaments = await getAllTournaments();
+   const currDate = new Date();
 
+   const upcomingTournaments = allTournaments.filter((tournament) => new Date(tournament.endDate) < currDate)
+   if(!upcomingTournaments){return res.status(200).json({ message : "No tournaments are played "})}
+   res.send(upcomingTournaments)
+
+}
 
 //result related controllers
 const handleAddIndividualResult = async (req,res) => {
@@ -249,4 +257,4 @@ const handleAdminLogin = async(req,res)=>{
    }
 }
 
-export { handleGetRequestdPlayers , handleAcceptPlayer ,handleRejectPlayer ,handleAddTournament ,handleAddMeritCertificate ,handleAddParticipationCertificate , handleGetAllTournament,handleEventSort ,handleAddIndividualResult,handleAddTeamResult,handleAddChampionshipResult, handleCreateEntry, handleGetTentry,handleGetLatestTournaments,handleGetChampionshipResult, handleGetIndividual,handleGetTeamResult};
+export { handleGetRequestdPlayers , handleAcceptPlayer ,handleRejectPlayer ,handleAddTournament ,handleAddMeritCertificate ,handleAddParticipationCertificate , handleGetAllTournament,handleEventSort ,handleAddIndividualResult,handleAddTeamResult,handleAddChampionshipResult, handleCreateEntry, handleGetTentry,handleGetLatestTournaments,handleGetChampionshipResult, handleGetIndividual,handleGetTeamResult,handleGetPlayedTournament};

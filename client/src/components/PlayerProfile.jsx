@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const PlayerProfile = () => {
   const [playerAccount, setPlayerAccount] = useState({});
@@ -10,6 +12,7 @@ const PlayerProfile = () => {
   const [upcomingTournaments, setUpcomingTournaments] = useState([]);
 
   const navigate = useNavigate();
+  const notify = () => toast.success("LoggedIn successfully ");
 
   const fetchPlayers = async () => {
     const token = Cookies.get("jwtToken");
@@ -30,6 +33,7 @@ const PlayerProfile = () => {
   };
 
   useEffect(() => {
+    notify()
     fetchPlayers();
   }, []);
 
@@ -54,6 +58,7 @@ const PlayerProfile = () => {
 
   return (
     <>
+    <Toaster />
       <div className="w-full min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 p-6 flex justify-center items-center">
         <div className="w-full max-w-7xl bg-white shadow-2xl rounded-xl overflow-hidden">
           {/* Player Profile Header */}
@@ -132,7 +137,7 @@ const PlayerProfile = () => {
             <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
               <table className="w-full text-sm text-left text-gray-700">
                 <thead className="text-xs text-gray-900 uppercase">
-                  <tr>
+                  <tr className="bg-yellow-600">
                     <th className="px-6 py-3">Sr.No</th>
                     <th className="px-6 py-3">Title of Tournament</th>
                     <th className="px-6 py-3">Age Category</th>
@@ -143,18 +148,18 @@ const PlayerProfile = () => {
                 <tbody>
                   {upcomingTournaments.length > 0 ? (
                     upcomingTournaments.map((tournament, index) => (
-                      <tr className="bg-gray-50" key={index}>
-                        <td className="px-6 py-4 font-medium">{index + 1}</td>
-                        <td className="px-6 py-4 font-medium">
+                      <tr className="bg-gray-50 " key={index}>
+                        <td className="px-6 py-4  font-bold">{index + 1}</td>
+                        <td className="px-6 py-4 font-bold">
                           {tournament.title}
                         </td>
-                        <td className="px-6 py-4 font-medium">
-                          {tournament.ageCategory}
+                        <td className="px-6 py-4 font-bold">
+                          Under {tournament.ageCategory}
                         </td>
-                        <td className="px-6 py-4 font-medium">
+                        <td className="px-6 py-4 font-bold">
                           {tournament.locationState}
                         </td>
-                        <td className="px-6 py-4 font-medium">
+                        <td className="px-6 py-4 font-bold">
                           {tournament.locationCity}
                         </td>
                       </tr>

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ExcelJS from "exceljs";
+import toast, { Toaster } from 'react-hot-toast';
 import { saveAs } from "file-saver";
 
-//googlesheet url
-// https://script.google.com/macros/s/AKfycbyr_fd3NtVlNQ6W7q-jsq01hwGBjyv4KSvHpJN5Mab-zLbwFW4elO1P1yJi67P6Gka6/exec
 
 const CreateEntry = () => {
   const [epeePlayers, setEpeePlayers] = useState([]);
@@ -15,6 +14,10 @@ const CreateEntry = () => {
   const [selectTournament, setSelectTournament] = useState();
   const [tournamentList, setTournamentList] = useState([]);
   const [playerList, setPlayerList] = useState([]);
+  const [epeeCount,setEpeeCount] = useState(0)
+  const [sabreCount,setSabreCount] = useState(0)
+  const [foilCount,setFoilCount] = useState(0)
+
   const handleGenderChange = (e) => {
     setGender(e.target.value);
     console.log(e.target.value);
@@ -88,9 +91,23 @@ const CreateEntry = () => {
     fetchData();
   }, []);
 
-  const handlePlayerChange = (name) => {
-    setPlayerNameArray((prev) => [...prev, name]);
-  };
+  const handlePlayerChange = (name,event) => {
+   
+
+    if( event == "Epee" && epeeCount < 4){
+        setPlayerNameArray((prev) => [...prev, name]);
+        setEpeeCount((prev) => prev +1)
+      }
+    if( event == "Sabre" && sabreCount < 4){
+        setPlayerNameArray((prev) => [...prev, name]);
+        setSabreCount((prev) => prev +1)
+      }
+    if( event == "Foil" && foilCount < 4){
+        setPlayerNameArray((prev) => [...prev, name]);
+        setFoilCount((prev) => prev +1)
+      }
+    };
+    console.log(epeeCount);
 
   const epeePlayerArray = () => {
     return epeePlayers
@@ -199,9 +216,11 @@ const CreateEntry = () => {
         type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
       });
       saveAs(blob, `players_entries.xlsx`);
+      toast.success("Exported the player list in Excel")
     } catch (error) {
-      console.log(error);
+      toast.error("Couldn't export players");
     }
+
 
    sendSinglePlayertoDatabase(playersArray)
   };
@@ -233,16 +252,17 @@ const CreateEntry = () => {
   
 
   return (
-    <div className="w-full min-h-screen shadow-2xl p-5">
-      <div className="bg-white rounded-lg w-full mt-20 p-5">
-        <h1 className="text-center text-2xl font-bold text-black p-5">
+    <div className="w-full  rounded-lg shadow-2xl p-5">
+      <Toaster />
+      <div className="bg-white rounded-lg w-full p-5">
+        <h1 className="text-center font-extrabold text-3xl text-gray-800 p-5">
           Create Tournament Entry
         </h1>
 
         <form id="FormEle" onSubmit={exportPlayers}>
           <div className="w-full flex justify-between items-center">
             <select
-              className="w-[50%]"
+              className="w-[50%] border border-black rounded-lg p-3"
               id="tournamentSelect"
               onChange={chooseTournament}
               value={selectTournament}
@@ -259,7 +279,7 @@ const CreateEntry = () => {
             </select>
 
             <select
-              className="w-[30%]"
+              className="w-[30%] border border-black rounded-lg p-3"
               onChange={handleGenderChange}
               value={gender}
             >
@@ -281,7 +301,8 @@ const CreateEntry = () => {
                     <input
                       type="checkbox"
                       id={player.pid}
-                      onChange={() => handlePlayerChange(player.fullName)}
+                      onChange={() => handlePlayerChange(player.fullName,player.eventName)}
+                      disabled={epeeCount >=4 ? true : false}
                     />
                   </div>
                 ))}
@@ -298,7 +319,8 @@ const CreateEntry = () => {
                     <input
                       type="checkbox"
                       id={player.pid}
-                      onChange={() => handlePlayerChange(player.fullName)}
+                      onChange={() => handlePlayerChange(player.fullName,player.eventName)}
+                      disabled={foilCount >=4 ? true : false}
                     />
                   </div>
                 ))}
@@ -315,7 +337,8 @@ const CreateEntry = () => {
                     <input
                       type="checkbox"
                       id={player.pid}
-                      onChange={() => handlePlayerChange(player.fullName)}
+                      onChange={() => handlePlayerChange(player.fullName,player.eventName)}
+                      disabled={sabreCount >= 4 ? true : false}
                     />
                   </div>
                 ))}

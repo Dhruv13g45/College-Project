@@ -54,6 +54,22 @@ async function getPlayersInTournament(req,res) {
     const players = await getPlayersByTournament(tid);
     res.send(players)
 }
+async function getPlayerForCertificates(req,res) {
+  const tid = req.params.tid
+  if(!tid){
+    return res.status(400).json({message : "tid is required"})
+  }
+  const [rows] = await pool.query(`SELECT DISTINCT pd.*
+FROM player_details pd
+JOIN tournament_entry te ON pd.pid = te.pid
+JOIN individual_results ir ON te.tentryid = ir.tentryid
+WHERE te.tid = ${tid};`);
+
+    const players = rows;
+    res.send(players)
+}
+
+
 
 
 // Player Register
@@ -225,4 +241,4 @@ async function handleGeMeritCerti(req,res) {
 
 
 
-export { getAllPlayers, getPlayerDetail , registerPlayer ,handleGetPartiCerti ,handleGeMeritCerti , handleLogin, handleVerifyPlayer , getPlayersInTournament}
+export { getAllPlayers, getPlayerDetail , registerPlayer ,handleGetPartiCerti ,handleGeMeritCerti , handleLogin, handleVerifyPlayer , getPlayersInTournament,getPlayerForCertificates}

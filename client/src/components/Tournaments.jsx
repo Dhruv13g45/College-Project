@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const Tournaments = () => {
   const [formData, setFormData] = useState({
@@ -31,14 +33,15 @@ const Tournaments = () => {
         { headers: { "Content-Type": "application/json" } }
       );
       console.log("Tournament added:", response.data);
-      alert("Tournament Added Successfully");
+      toast.success("Tournament Added Successfully");
     } catch (error) {
-      console.error("Error adding tournament:", error);
+      toast.error("Error adding tournament");
     }
   };
 
   return (
     <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg p-6 mt-6">
+      <Toaster />
       <h1 className="text-center text-2xl font-bold text-gray-800 mb-6">
         Add New Tournament
       </h1>
@@ -103,7 +106,7 @@ const Tournaments = () => {
               name="ageCategory"
               value={formData.ageCategory}
               onChange={handleDataChange}
-              className="p-2 border rounded-md focus:ring focus:ring-blue-300"
+              className="p-2 border border-black rounded-md focus:ring focus:ring-blue-300"
               required
             >
               <option value="">Select Age Category</option>
@@ -125,7 +128,7 @@ const Tournaments = () => {
               name="startingDate"
               value={formData.startingDate}
               onChange={handleDataChange}
-              className="p-2 border rounded-md focus:ring focus:ring-blue-300"
+              className="p-2 border border-black rounded-md focus:ring focus:ring-blue-300"
               required
             />
           </div>
@@ -137,7 +140,7 @@ const Tournaments = () => {
               name="endDate"
               value={formData.endDate}
               onChange={handleDataChange}
-              className="p-2 border rounded-md focus:ring focus:ring-blue-300"
+              className="p-2 border border-black rounded-md focus:ring focus:ring-blue-300"
               required
             />
           </div>
